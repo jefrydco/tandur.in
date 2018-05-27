@@ -28,7 +28,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".encyclopedia.EncyclopediaDetailActivity" />
+        <activity
+            android:name=".encyclopedia.EncyclopediaDetailActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
     </application>
 
 </manifest>
