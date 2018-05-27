@@ -3,6 +3,7 @@ package in.tandur.tandurin.encyclopedia;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,14 +109,32 @@ public class EncyclopediaActivity extends AppCompatActivity {
 
         RecyclerItemClickSupportUtils.addTo(mEncyclopediaBinding.activityEncyclopediaRecyclerView)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    Toast.makeText(
+//                    Toast.makeText(
+//                            this,
+//                            String.format(
+//                                    Locale.US,
+//                                    "%s",
+//                                    mEncyclopediaModelList.get(position).getRegularName()),
+//                            Toast.LENGTH_SHORT)
+//                            .show();
+                    EncyclopediaModel currentEncyclopediaModel = mEncyclopediaModelList.get(position);
+                    Intent intentToEncyclopediaDetailActivity = new Intent(
                             this,
-                            String.format(
-                                    Locale.US,
-                                    "%s",
-                                    mEncyclopediaModelList.get(position).getRegularName()),
-                            Toast.LENGTH_SHORT)
-                            .show();
+                            EncyclopediaDetailActivity.class);
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.ID, currentEncyclopediaModel.getId());
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.RANK, currentEncyclopediaModel.getRank());
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.IMAGE_URL, currentEncyclopediaModel.getImageUrl());
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.REGULAR_NAME, currentEncyclopediaModel.getRegularName());
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.SCIENTIFIC_NAME, currentEncyclopediaModel.getScientificName());
+                    intentToEncyclopediaDetailActivity.putExtra(
+                            EncyclopediaConstant.DESCRIPTION, currentEncyclopediaModel.getDescription());
+
+                    startActivity(intentToEncyclopediaDetailActivity);
                 });
 
         mEncyclopediaBinding.activityEncyclopediaRecyclerView
@@ -196,7 +215,11 @@ public class EncyclopediaActivity extends AppCompatActivity {
                             DataUtils.toSentenceCase(DataUtils.generateRandomWords(2)),
                             i
                     ),
-                    "Lorem ipsum"
+                    String.format(
+                            Locale.US,
+                            "%s",
+                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(100))
+                    )
             ));
         }
 
