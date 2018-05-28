@@ -6,13 +6,99 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutCompat2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat2">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/reminder"
+            android:src="@drawable/ic_access_alarm_green_64dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Encyclopedia" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/linearLayoutCompat2"
+        app:layout_constraintStart_toStartOf="@+id/linearLayoutCompat2"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat2"
+        app:layout_constraintVertical_bias="0.3">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/flower_shop"
+            android:src="@drawable/ic_shopping_basket_pink_64dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Encyclopedia" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutCompat3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat3"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutCompat3"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/register_shop"
+            android:src="@drawable/ic_store_blue_64dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Encyclopedia" />
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.19">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/encyclopedia"
+            android:src="@drawable/ic_book_light_green_64dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Encyclopedia" />
+    </android.support.v7.widget.LinearLayoutCompat>
 
 </android.support.constraint.ConstraintLayout>

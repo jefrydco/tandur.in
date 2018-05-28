@@ -16,21 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".encyclopedia.EncyclopediaActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".encyclopedia.EncyclopediaDetailActivity"
-            android:theme="@style/AppThemeNoActionBar"/>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".store.StoreActivity">
+
+        </activity>
+        <activity
+            android:name=".store.StoreDetailActivity"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>

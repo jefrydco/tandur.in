@@ -2,4 +2,9 @@
     <string name="app_name">Tandur.In</string>
     <string name="encyclopedia_image">Encyclopedia Image</string>
     <string name="search_encyclopedia">Search Encyclopedia</string>
+    <string name="search_store">Search Store</string>
+    <string name="encyclopedia">Encyclopedia</string>
+    <string name="reminder">Reminder</string>
+    <string name="flower_shop">Flower Shop</string>
+    <string name="register_shop">Register Shop</string>
 </resources>
