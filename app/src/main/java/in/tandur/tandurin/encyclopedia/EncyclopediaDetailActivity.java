@@ -38,12 +38,12 @@ public class EncyclopediaDetailActivity extends AppCompatActivity {
             getSupportActionBar().setTitle(regularName);
         }
 
-        GlideApp.with(mEncyclopediaDetailBinding.acitivyEncyclopediaDetailImageView)
+        GlideApp.with(mEncyclopediaDetailBinding.activityEncyclopediaDetailImageView)
                 .load(imageUrl)
                 .transition(withCrossFade())
                 .centerCrop()
                 .placeholder(R.drawable.ic_local_florist_pink_64dp)
-                .into(mEncyclopediaDetailBinding.acitivyEncyclopediaDetailImageView);
+                .into(mEncyclopediaDetailBinding.activityEncyclopediaDetailImageView);
 
         mEncyclopediaDetailBinding.setEncyclopedia(mEncyclopediaModel);
     }

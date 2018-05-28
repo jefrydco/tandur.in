@@ -15,7 +15,7 @@
         tools:context=".encyclopedia.EncyclopediaDetailActivity">
 
         <android.support.design.widget.AppBarLayout
-            android:id="@+id/appBarLayout"
+            android:id="@+id/activity_encyclopedia_detail_appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -27,7 +27,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <ImageView
-                    android:id="@+id/acitivy_encyclopedia_detail_imageView"
+                    android:id="@+id/activity_encyclopedia_detail_imageView"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:contentDescription="@string/encyclopedia_image"
@@ -46,7 +46,7 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+            android:id="@+id/activity_encyclopedia_detail_nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
@@ -71,14 +71,14 @@
                         android:layout_marginTop="16dp"
                         android:gravity="center_vertical"
                         android:text="@{encyclopedia.regularName}"
-                        app:layout_constraintBottom_toTopOf="@+id/acitivy_encyclopedia_detail_textView_scientificName"
+                        app:layout_constraintBottom_toTopOf="@+id/activity_encyclopedia_detail_textView_scientificName"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:text="Jagung" />
 
                     <TextView
-                        android:id="@+id/acitivy_encyclopedia_detail_textView_scientificName"
+                        android:id="@+id/activity_encyclopedia_detail_textView_scientificName"
                         android:layout_width="0dp"
                         android:layout_height="18dp"
                         android:layout_marginBottom="8dp"
@@ -99,10 +99,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:text="@{encyclopedia.description}"
-                        app:layout_constraintEnd_toEndOf="@+id/acitivy_encyclopedia_detail_textView_scientificName"
+                        app:layout_constraintEnd_toEndOf="@+id/activity_encyclopedia_detail_textView_scientificName"
                         app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="@+id/acitivy_encyclopedia_detail_textView_scientificName"
-                        app:layout_constraintTop_toBottomOf="@+id/acitivy_encyclopedia_detail_textView_scientificName"
+                        app:layout_constraintStart_toStartOf="@+id/activity_encyclopedia_detail_textView_scientificName"
+                        app:layout_constraintTop_toBottomOf="@+id/activity_encyclopedia_detail_textView_scientificName"
                         tools:text="Lorem ipsum" />
 
                 </android.support.constraint.ConstraintLayout>
