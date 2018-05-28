@@ -4,7 +4,7 @@
 
     <data>
         <variable
-            name="encyclopedia"
+            name="store"
             type="in.tandur.tandurin.store.StoreModel" />
     </data>
 

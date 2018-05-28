@@ -27,8 +27,12 @@
         <activity
             android:name=".encyclopedia.EncyclopediaDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".store.StoreActivity" />
-        <activity android:name=".store.StoreDetailActivity"></activity>
+        <activity android:name=".store.StoreActivity">
+
+        </activity>
+        <activity
+            android:name=".store.StoreDetailActivity"
+            android:theme="@style/AppThemeNoActionBar" />
     </application>
 
 </manifest>
