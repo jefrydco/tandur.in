@@ -9,6 +9,8 @@ import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
 import java.util.Comparator;
 
+import in.tandur.tandurin.databinding.ItemStoreBinding;
+
 public class StoreAdapter extends SortedListAdapter<StoreModel> {
     public StoreAdapter(@NonNull Context context, @NonNull Class<StoreModel> itemClass, @NonNull Comparator<StoreModel> comparator) {
         super(context, itemClass, comparator);
@@ -17,6 +19,7 @@ public class StoreAdapter extends SortedListAdapter<StoreModel> {
     @NonNull
     @Override
     protected ViewHolder<? extends StoreModel> onCreateViewHolder(@NonNull LayoutInflater inflater, @NonNull ViewGroup parent, int viewType) {
-        return null;
+        final ItemStoreBinding itemStoreBinding = ItemStoreBinding.inflate(inflater, parent, false);
+        return new StoreViewHolder(itemStoreBinding);
     }
 }
