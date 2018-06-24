@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".reminder.ReminderActivity">
+
+    <cn.iwgang.countdownview.CountdownView
+        android:id="@+id/activity_reminder_countDownView_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+        app:isShowHour="true"
+        app:isShowMillisecond="true"
+        app:isShowMinute="true"
+        app:isShowSecond="true"
+        app:layout_constraintBottom_toTopOf="@+id/activity_main_spinner_timer_option"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:timeTextSize="36sp" />
+
+    <Button
+        android:id="@+id/activity_main_button_start_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="96dp"
+        android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_button_stop_timer"
+        app:layout_constraintStart_toStartOf="@+id/activity_main_spinner_timer_option"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_spinner_timer_option" />
+
+    <Button
+        android:id="@+id/activity_main_button_stop_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        app:layout_constraintBaseline_toBaselineOf="@+id/activity_main_button_start_timer"
+        app:layout_constraintEnd_toEndOf="@+id/activity_main_spinner_timer_option"
+        app:layout_constraintStart_toEndOf="@+id/activity_main_button_start_timer" />
+
+    <Spinner
+        android:id="@+id/activity_main_spinner_timer_option"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/activity_main_button_start_timer"
+        app:layout_constraintEnd_toEndOf="@+id/activity_reminder_countDownView_timer"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/activity_reminder_countDownView_timer"
+        app:layout_constraintTop_toBottomOf="@+id/activity_reminder_countDownView_timer" />
+
+</android.support.constraint.ConstraintLayout>
