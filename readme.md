@@ -15,3 +15,6 @@ $password = "";
 $dbname = "db_tandur"; 
 ```
 
+## License
+[MIT](http://opensource.org/licenses/MIT)
+Copyright (c) 2018 - Jefry Dewangga
