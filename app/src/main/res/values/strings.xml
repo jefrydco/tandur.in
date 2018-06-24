@@ -7,4 +7,12 @@
     <string name="reminder">Reminder</string>
     <string name="flower_shop">Flower Shop</string>
     <string name="register_shop">Register Shop</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="days">days</string>
+    <string name="hours">hrs</string>
+    <string name="minutes">mins</string>
+    <string name="seconds">secs</string>
+    <string name="time_is_up">Time is up</string>
 </resources>
