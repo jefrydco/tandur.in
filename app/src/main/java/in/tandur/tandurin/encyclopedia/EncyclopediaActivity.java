@@ -5,18 +5,22 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Toast;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,9 +30,63 @@ import java.util.Locale;
 import in.tandur.tandurin.R;
 import in.tandur.tandurin.databinding.ActivityEncyclopediaBinding;
 import in.tandur.tandurin.utils.DataUtils;
+import in.tandur.tandurin.utils.NetworkUtils;
 import in.tandur.tandurin.utils.RecyclerItemClickSupportUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EncyclopediaActivity extends AppCompatActivity {
+
+    private static final String TAG = "EncyclopediaActivity";
+
+    private EncyclopediaService mEncyclopediaService;
+    private Call<String> mCall;
+    private Callback<String> mCallback = new Callback<String>() {
+        @Override
+        public void onResponse(@NonNull Call<String> call, Response<String> response) {
+            String jsonResponse = response.body();
+
+            try {
+                JSONObject rootObject = new JSONObject(jsonResponse);
+                JSONArray encyArray = rootObject.getJSONArray("ency");
+
+                if (encyArray.length() > 0) {
+                    mEncyclopediaModelList = new ArrayList<>();
+
+                    for (int index = 0; index < encyArray.length(); index++) {
+                        JSONObject encyArrayItem = encyArray.getJSONObject(index);
+
+                        int encyId = encyArrayItem.getInt("ency_id");
+                        String encyName = encyArrayItem.getString("ency_nama");
+                        String encyScientificName = encyArrayItem.getString("ency_latin");
+                        String encyImage = NetworkUtils.API_URL + encyArrayItem.getString("ency_image");
+                        String encyInfo = encyArrayItem.getString("ency_info");
+
+                        mEncyclopediaModelList.add(new EncyclopediaModel(
+                                encyId,
+                                index,
+                                encyImage,
+                                encyName,
+                                encyScientificName,
+                                encyInfo
+                        ));
+                    }
+
+                    mEncyclopediaAdapter.edit()
+                            .replaceAll(mEncyclopediaModelList)
+                            .commit();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onFailure(@NonNull Call<String> call, @NonNull Throwable t) {
+
+        }
+    };
 
     private static final Comparator<EncyclopediaModel> COMPARATOR = new SortedListAdapter.ComparatorBuilder<EncyclopediaModel>()
             .setOrderForModel(EncyclopediaModel.class, (a, b) -> Integer.signum(a.getRank() - b.getRank()))
@@ -109,14 +167,6 @@ public class EncyclopediaActivity extends AppCompatActivity {
 
         RecyclerItemClickSupportUtils.addTo(mEncyclopediaBinding.activityEncyclopediaRecyclerView)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-//                    Toast.makeText(
-//                            this,
-//                            String.format(
-//                                    Locale.US,
-//                                    "%s",
-//                                    mEncyclopediaModelList.get(position).getRegularName()),
-//                            Toast.LENGTH_SHORT)
-//                            .show();
                     EncyclopediaModel currentEncyclopediaModel = mEncyclopediaModelList.get(position);
                     Intent intentToEncyclopediaDetailActivity = new Intent(
                             this,
@@ -142,10 +192,9 @@ public class EncyclopediaActivity extends AppCompatActivity {
         mEncyclopediaBinding.activityEncyclopediaRecyclerView
                 .setAdapter(mEncyclopediaAdapter);
 
-        mEncyclopediaModelList = generateEncyclopediaModelList(100);
-        mEncyclopediaAdapter.edit()
-                .replaceAll(mEncyclopediaModelList)
-                .commit();
+        mEncyclopediaService = (EncyclopediaService) NetworkUtils.fetch(EncyclopediaService.class);
+        mCall = mEncyclopediaService.getEncyclopediaList();
+        mCall.enqueue(mCallback);
     }
 
     @Override
