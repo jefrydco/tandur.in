@@ -1,5 +1,5 @@
 <?php
-include 'config_list_ency.php';
+include '../config/config.php';
 
 function createEncy($conn, $nama, $alamat) { 
     $sql = "INSERT INTO ency_tandur(ency_nama, ency_alamat, ency_info) VALUES('$nama', '$alamat', '$info')";

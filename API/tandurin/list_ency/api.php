@@ -1,6 +1,6 @@
 <?php
     include 'model_list_ency.php';
-    include 'config_list_ency.php';
+    include '../config/config.php';
 
     header('Content-Type: application/json');
 

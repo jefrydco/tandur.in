@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include '../config/config.php';
 
 function createStore($conn, $nama, $alamat, $bunga) { 
     $sql = "INSERT INTO shop_tandur(shop_nama, shop_alamat, shop_info) VALUES('$nama', '$alamat', '$bunga')";

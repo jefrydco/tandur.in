@@ -1,6 +1,6 @@
 <?php
     include 'model_register_store.php';
-    include 'config_register_store.php';
+    include '../config/config.php';
 
     header('Content-Type: application/json');
 
