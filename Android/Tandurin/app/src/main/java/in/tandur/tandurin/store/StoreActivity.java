@@ -3,12 +3,13 @@ package in.tandur.tandurin.store;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 
 import com.github.wrdlbrnft.sortedlistadapter.SortedListAdapter;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,12 +29,66 @@ import java.util.Locale;
 
 import in.tandur.tandurin.R;
 import in.tandur.tandurin.databinding.ActivityStoreBinding;
-import in.tandur.tandurin.encyclopedia.EncyclopediaModel;
-import in.tandur.tandurin.store.StoreModel;
 import in.tandur.tandurin.utils.DataUtils;
+import in.tandur.tandurin.utils.NetworkUtils;
 import in.tandur.tandurin.utils.RecyclerItemClickSupportUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class StoreActivity extends AppCompatActivity {
+
+    private static final String TAG = "StoreActivity";
+
+    private StoreService mStoreService;
+    private Call<String> mCall;
+    private Callback<String> mCallback = new Callback<String>() {
+        @Override
+        public void onResponse(Call<String> call, Response<String> response) {
+            String jsonResponse = response.body();
+
+            Log.d(TAG, "onResponse: jsonResponse: " + jsonResponse);
+
+            try {
+                JSONObject rootObject = new JSONObject(jsonResponse);
+                JSONArray shopArray = rootObject.getJSONArray("store");
+
+                if (shopArray.length() > 0) {
+                    mStoreModelList = new ArrayList<>();
+
+                    for (int index = 0; index < shopArray.length(); index++) {
+                        JSONObject shopArrayItem = shopArray.getJSONObject(index);
+                        Log.d(TAG, "onResponse: shopArrayItem" + shopArrayItem);
+
+                        int shopId = shopArrayItem.getInt("shop_id");
+                        String shopName = shopArrayItem.getString("shop_nama");
+                        String shopAddress = shopArrayItem.getString("shop_alamat");
+                        String shopInfo = shopArrayItem.getString("shop_info");
+
+                        mStoreModelList.add(new StoreModel(
+                                shopId,
+                                index,
+                                "http://www.greensofhighgate.com/communities/2/004/013/522/962//images/4631215491.jpg",
+                                shopName,
+                                shopAddress,
+                                shopInfo
+                        ));
+                    }
+
+                    mStoreAdapter.edit()
+                            .replaceAll(mStoreModelList)
+                            .commit();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<String> call, Throwable t) {
+
+        }
+    };
 
     private static final Comparator<StoreModel> COMPARATOR = new SortedListAdapter.ComparatorBuilder<StoreModel>()
             .setOrderForModel(StoreModel.class, (a, b) -> Integer.signum(a.getRank() - b.getRank()))
@@ -110,15 +169,18 @@ public class StoreActivity extends AppCompatActivity {
 
         RecyclerItemClickSupportUtils.addTo(mStoreBinding.activityStoreRecyclerView)
                 .setOnItemClickListener((recyclerView, position, v) -> {
-                    Toast.makeText(
+                    StoreModel currentStoreModel = mStoreModelList.get(position);
+                    Intent intentToStoreDetailActivity = new Intent(
                             this,
-                            String.format(
-                                    Locale.US,
-                                    "%s",
-                                    mStoreModelList.get(position).getName()
-                            ),
-                            Toast.LENGTH_SHORT
-                    ).show();
+                            StoreDetailActivity.class);
+                    intentToStoreDetailActivity.putExtra(StoreConstant.ID, currentStoreModel.getId());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.RANK, currentStoreModel.getRank());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.IMAGE_URL, currentStoreModel.getImageUrl());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.NAME, currentStoreModel.getName());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.LOCATION, currentStoreModel.getLocation());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.DESCRIPTION, currentStoreModel.getDescription());
+
+                    startActivity(intentToStoreDetailActivity);
                 });
 
         mStoreBinding.activityStoreRecyclerView
@@ -126,10 +188,9 @@ public class StoreActivity extends AppCompatActivity {
         mStoreBinding.activityStoreRecyclerView
                 .setAdapter(mStoreAdapter);
 
-        mStoreModelList = generateStoreModelList(100);
-        mStoreAdapter.edit()
-                .replaceAll(mStoreModelList)
-                .commit();
+        mStoreService = (StoreService) NetworkUtils.fetch(StoreService.class);
+        mCall = mStoreService.getStoreList();
+        mCall.enqueue(mCallback);
     }
 
     @Override

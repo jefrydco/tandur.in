@@ -49,16 +49,15 @@
             <TextView
                 android:id="@+id/item_store_textView_location"
                 android:layout_width="0dp"
-                android:layout_height="24dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:text="@{store.location}"
                 app:layout_constraintBottom_toBottomOf="@+id/item_store_imageView_thumbnail"
                 app:layout_constraintEnd_toEndOf="@+id/item_store_textView_name"
                 app:layout_constraintStart_toStartOf="@+id/item_store_textView_name"
                 app:layout_constraintTop_toBottomOf="@+id/item_store_textView_name"
-                tools:text="Surabaya"
-                android:text="@{store.location}"
-                android:textStyle="italic"/>
+                tools:text="Surabaya" />
 
             <View
                 android:id="@+id/view"
