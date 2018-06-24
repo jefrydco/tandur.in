@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.wrdlbrnft:modular-adapter-0.3.0.22">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/modular-adapter-0.3.0.22.aar/f6b429ab05eee1c577d34bcba031b46b/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/modular-adapter-0.3.0.22.aar/f6b429ab05eee1c577d34bcba031b46b/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.wrdlbrnft/modular-adapter/0.3.0.22/7682eb6fcb6bfa5a0d7e1d9961c525f05ecfb148/modular-adapter-0.3.0.22-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
