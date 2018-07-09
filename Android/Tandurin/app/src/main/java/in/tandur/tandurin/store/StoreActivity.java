@@ -63,6 +63,8 @@ public class StoreActivity extends AppCompatActivity {
                         int shopId = shopArrayItem.getInt("shop_id");
                         String shopName = shopArrayItem.getString("shop_nama");
                         String shopAddress = shopArrayItem.getString("shop_alamat");
+                        String shopLat = shopArrayItem.getString("shop_lat");
+                        String shopLng = shopArrayItem.getString("shop_lng");
                         String shopInfo = shopArrayItem.getString("shop_info");
 
                         mStoreModelList.add(new StoreModel(
@@ -71,6 +73,8 @@ public class StoreActivity extends AppCompatActivity {
                                 "http://www.greensofhighgate.com/communities/2/004/013/522/962//images/4631215491.jpg",
                                 shopName,
                                 shopAddress,
+                                shopLat,
+                                shopLng,
                                 shopInfo
                         ));
                     }
@@ -178,6 +182,8 @@ public class StoreActivity extends AppCompatActivity {
                     intentToStoreDetailActivity.putExtra(StoreConstant.IMAGE_URL, currentStoreModel.getImageUrl());
                     intentToStoreDetailActivity.putExtra(StoreConstant.NAME, currentStoreModel.getName());
                     intentToStoreDetailActivity.putExtra(StoreConstant.LOCATION, currentStoreModel.getLocation());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.LAT, currentStoreModel.getLat());
+                    intentToStoreDetailActivity.putExtra(StoreConstant.LNG, currentStoreModel.getLng());
                     intentToStoreDetailActivity.putExtra(StoreConstant.DESCRIPTION, currentStoreModel.getDescription());
 
                     startActivity(intentToStoreDetailActivity);
@@ -240,34 +246,34 @@ public class StoreActivity extends AppCompatActivity {
         return filteredStoreModelList;
     }
 
-    private List<StoreModel> generateStoreModelList(int count) {
-        List<StoreModel> storeModelList = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            storeModelList.add(new StoreModel(
-                    i,
-                    i,
-                    "https://flowermag.com/wp-content/uploads/2017/08/dahlia.jpg",
-                    String.format(
-                            Locale.US,
-                            "%s %d",
-                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(2)),
-                            i
-                    ),
-                    String.format(
-                            Locale.US,
-                            "%s %d",
-                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(2)),
-                            i
-                    ),
-                    String.format(
-                            Locale.US,
-                            "%s",
-                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(100))
-                    )
-            ));
-        }
-
-        return storeModelList;
-    }
+//    private List<StoreModel> generateStoreModelList(int count) {
+//        List<StoreModel> storeModelList = new ArrayList<>();
+//
+//        for (int i = 0; i < count; i++) {
+//            storeModelList.add(new StoreModel(
+//                    i,
+//                    i,
+//                    "https://flowermag.com/wp-content/uploads/2017/08/dahlia.jpg",
+//                    String.format(
+//                            Locale.US,
+//                            "%s %d",
+//                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(2)),
+//                            i
+//                    ),
+//                    String.format(
+//                            Locale.US,
+//                            "%s %d",
+//                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(2)),
+//                            i
+//                    ),
+//                    String.format(
+//                            Locale.US,
+//                            "%s",
+//                            DataUtils.toSentenceCase(DataUtils.generateRandomWords(100))
+//                    )
+//            ));
+//        }
+//
+//        return storeModelList;
+//    }
 }

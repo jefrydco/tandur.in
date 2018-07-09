@@ -22,6 +22,8 @@ function getStore($conn) {
         $store_temp['shop_id']= $row['shop_id'];
         $store_temp['shop_nama'] = $row['shop_nama'];  
         $store_temp['shop_alamat'] = $row['shop_alamat'];
+        $store_temp['shop_lat'] = $row['shop_lat'];
+        $store_temp['shop_lng'] = $row['shop_lng'];
         $store_temp['shop_info'] = $row['shop_info'];
         array_push($store, $store_temp);
     }

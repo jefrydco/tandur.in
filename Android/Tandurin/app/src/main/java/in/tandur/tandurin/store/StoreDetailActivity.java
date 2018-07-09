@@ -3,7 +3,16 @@ package in.tandur.tandurin.store;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewTreeObserver;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import in.tandur.tandurin.R;
 import in.tandur.tandurin.databinding.ActivityStoreDetailBinding;
@@ -27,9 +36,11 @@ public class StoreDetailActivity extends AppCompatActivity {
         String imageUrl = intentFromStoreActivity.getStringExtra(StoreConstant.IMAGE_URL);
         String name = intentFromStoreActivity.getStringExtra(StoreConstant.NAME);
         String location = intentFromStoreActivity.getStringExtra(StoreConstant.LOCATION);
+        String lat = intentFromStoreActivity.getStringExtra(StoreConstant.LAT);
+        String lng = intentFromStoreActivity.getStringExtra(StoreConstant.LNG);
         String description = intentFromStoreActivity.getStringExtra(StoreConstant.DESCRIPTION);
 
-        StoreModel mStoreModel = new StoreModel(id, rank, imageUrl, name, location, description);
+        StoreModel mStoreModel = new StoreModel(id, rank, imageUrl, name, location, lat, lng, description);
 
         setSupportActionBar(mStoreDetailBinding.activityStoreDetailToolbar);
 
@@ -46,6 +57,27 @@ public class StoreDetailActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_local_florist_pink_64dp)
                 .into(mStoreDetailBinding.activityStoreDetailImageView);
 
+
+
+        MapView mapView = findViewById(R.id.activity_store_detail_mapView);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(googleMap -> {
+            LatLng coordinates = new LatLng(Double.valueOf(lat), Double.valueOf(lng));
+
+            UiSettings mapUiSettings = googleMap.getUiSettings();
+            mapUiSettings.setZoomControlsEnabled(true);
+            mapUiSettings.setCompassEnabled(true);
+            mapUiSettings.setScrollGesturesEnabled(true);
+            mapUiSettings.setTiltGesturesEnabled(true);
+            mapUiSettings.setRotateGesturesEnabled(true);
+
+            googleMap.addMarker(new MarkerOptions().position(coordinates));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15.0f));
+            mapView.onResume();
+        });
+
         mStoreDetailBinding.setStore(mStoreModel);
+
+
     }
 }
