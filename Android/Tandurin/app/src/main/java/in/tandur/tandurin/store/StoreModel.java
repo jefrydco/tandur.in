@@ -10,14 +10,18 @@ public class StoreModel implements SortedListAdapter.ViewModel {
     private final String mImageUrl;
     private final String mName;
     private final String mLocation;
+    private final String mLat;
+    private final String mLng;
     private final String mDescription;
 
-    public StoreModel(int mId, int mRank, String mImageUrl, String mName, String mLocation, String mDescription) {
+    public StoreModel(int mId, int mRank, String mImageUrl, String mName, String mLocation, String mLat, String mLng, String mDescription) {
         this.mId = mId;
         this.mRank = mRank;
         this.mImageUrl = mImageUrl;
         this.mName = mName;
         this.mLocation = mLocation;
+        this.mLat = mLat;
+        this.mLng = mLng;
         this.mDescription = mDescription;
     }
 
@@ -61,6 +65,14 @@ public class StoreModel implements SortedListAdapter.ViewModel {
 
     public String getLocation() {
         return mLocation;
+    }
+
+    public String getLat() {
+        return mLat;
+    }
+
+    public String getLng() {
+        return mLng;
     }
 
     public String getDescription() {

@@ -18,6 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:theme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBtoxzPRiusLGfrasL1eZDcyHBX1657X8s"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,13 +60,13 @@
         </activity>
         <activity
             android:name=".store.StoreDetailActivity"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".store.StoreActivity"
             android:theme="@style/AppThemeNoActionBar">
 
             <!-- The meta-data element is needed for versions lower than 4.1 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".store.StoreActivity" />
         </activity>
         <activity
             android:name=".reminder.ReminderActivity"
